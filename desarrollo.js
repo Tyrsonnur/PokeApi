@@ -1,7 +1,6 @@
+function listaPokemon(url_pokeapi = 'https://pokeapi.co/api/v2/pokemon') {
 
-function paginaPokemones() {
     let divPokemon = document.querySelector("#grilla-pokemon")
-    let url_pokeapi = 'https:pokeapi.co/api/v2/pokemon'
     let dataAPI_pokeapi = fetch(url_pokeapi)
     dataAPI_pokeapi.then(respuestaPromesa => respuestaPromesa.json())
         .then(infojson => {
@@ -31,7 +30,7 @@ function paginaPokemones() {
 
                         divPokemon.innerHTML += `
                         <div class="card mx-2 mt-2" style="width: 20%">
-                            <img src="${infoPokemon.sprites.front_default}" class="card-img-top" alt="...">
+                        <img src="${infoPokemon.sprites.front_default}" class="card-img-top" alt="...">
                             <div class="card-body">
                             <h5 class="card-title fw-bold">${pokemon.name}</h5>
                             <ul class="ps-2 listaStats">
@@ -39,51 +38,60 @@ function paginaPokemones() {
                                 <li class="fw-bold"> Peso: ${infoPokemon.weight} Kg. </li>
                                 <li class="fw-bold"> Altura: ${infoPokemon.height} cm.</li>
                                 <li class="fw-bold"> XP Base: ${infoPokemon.base_experience} </li>
-                            </ul>
-                            <div class=" cuadroStats"> ${estadisticas} </div>
+                                </ul>
+                                <div class=" cuadroStats"> ${estadisticas} </div>
                             </div>
-                        </div>`
-                    });
-            }).catch(error => {
-                console.log(error)
-            })
-        });
+                            </div>
+                            `
+                    })
+            });
+            boton_siguiente.setAttribute(`data-url-pokemon`, infojson.next)
+            boton_anterior.setAttribute(`data-url-pokemon`, infojson.previous)
+
+        }).catch(error => {
+            console.log(error)
+        })
+
 }
+listaPokemon()
+paginaPokemones()
 
 async function GetPkmn() {
-    let url_pokeapi = 'https:pokeapi.co/api/v2/pokemon'
+    let url_pokeapi = 'https://pokeapi.co/api/v2/pokemon'
     let dataAPI_pokeapi = await fetch(url_pokeapi)
     let infojson = await dataAPI_pokeapi.json()
-    return infojson.results
+
 
     for (const pokemon of infojson.results) {
         let poke = await fetch(pokemon.url)
         let pokedara = await infojson()
-        console.log(dataAPI_pokeapi.id)
+        console.log(pokedara, poke)
+        return infojson.results
     }
 }
 
 //cambiar_pagina_siguiente()
 
-//function cambiar_pagina_siguiente() {
-//    let boton_siguiente = document.querySelector("#btn_siguiente")
-//    let boton_anterior = document.querySelector("#btn_anterior")
-//
-//   boton_siguiente.setAttribute('data-url-personajes', 'https://pokeapi.co/api/v2/pokemon?offset=20&limit=20')
-//    boton_anterior.setAttribute('data-url-personajes', '')
+function paginaPokemones() {
+    let boton_siguiente = document.querySelector("#btn_siguiente")
+    let boton_anterior = document.querySelector("#btn_anterior")
 
-//  boton_siguiente.addEventListener('click', function (disparador) {
-//    let P2 = disparador.target.getAttribute('data-url-personajes')
-//  if (P2 != null) {
-//    paginaPokemones(disparador.target.dataset.personajes)
-// }
-// })
+    boton_siguiente.setAttribute('data-url-pokemon', 'https://pokeapi.co/api/v2/pokemon?offset=20&limit=20')
+    boton_anterior.setAttribute('data-url-pokemon', '')
 
-//  boton_anterior.addEventListener('click', function (disparador) {
-//     if (P2 != null) {
-//        paginaPokemones(disparador.target.dataset.personajes)
-//   }
-// })
-//}
+    boton_siguiente.addEventListener('click', function (disparador) {
+        let P2 = disparador.target.getAttribute('data-url-pokemon')
+        if (P2 != null) {
+            listaPokemon(P2)
+        }
+    })
+
+    boton_anterior.addEventListener('click', function (disparador) {
+        let P2 = disparador.target.getAttribute('data-url-pokemon')
+        if (P2 != null) {
+            listaPokemon(P2)
+        }
+    })
+}
 
 
