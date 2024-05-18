@@ -69,3 +69,19 @@ body button{
 .cabecera{
     height: 200px;
 }
+
+.formulario1 input{
+    background-color: #285068;
+    margin-left: 40px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 4px solid #c00711;
+    color: var(--colorTexto);
+}
+
+.formulario1 button{
+    background-color: #285068;
+    border-radius: 10px;
+    border: 4px solid #c00711;
+    color: var(--colorTexto);
+}
