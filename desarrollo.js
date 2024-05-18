@@ -95,13 +95,12 @@ function paginaPokemones() {
 }
 
 
-function buscar() {
 
-    document.querySelector("#formulario").addEventListener("submit", funtion(e))
+document.querySelector("#formulario").addEventListener("submit", function (e) {
     e.preventDefault()
     let input = e.target.buscadorTxt.value
     let divPokemon = document.querySelector("#grilla-pokemon")
-    let urlPokemon = 'https://pokeapi.co/api/v2/pokemon/${input}'
+    let urlPokemon = `https://pokeapi.co/api/v2/pokemon/${input}`
 
     divPokemon.innerHTML = " "
     let consumoPokemon = fetch(urlPokemon)
@@ -130,7 +129,7 @@ function buscar() {
                         <div class="card mx-2 mt-2" style="width: 20%">
                         <img src="${infoPokemon.sprites.front_default}" class="card-img-top" alt="...">
                         <div class="card-body">
-                        <h5 class="card-title fw-bold">${pokemon.name}</h5>
+                        <h5 class="card-title fw-bold">${infoPokemon.name}</h5>
                         <ul class="ps-2 listaStats">
                         <li class="fw-bold"> Tipo: ${infoTipo} </li>
                         <li class="fw-bold"> Peso: ${infoPokemon.weight} Kg. </li>
@@ -142,8 +141,7 @@ function buscar() {
                                 </div>
                                 `
         })
-
-}
+})
 
 
 

@@ -7,11 +7,11 @@
 }
 
 body{
-    background-image:url(Assets/img/);
+    /**background-image:url(Assets/img/Diseño\ sin\ título.png);**/
     background-color: var(--colorFondo);
     background-repeat: no-repeat !important;
     background-position: center !important;
-    background-size: auto;
+
 }
 
 body button{
